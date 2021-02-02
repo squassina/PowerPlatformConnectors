@@ -29,6 +29,7 @@ class SettingsBuilder:
             api_definition,
             icon,
             client_id=None,
+            client_secret=None,
             tenant=None,
             authority_url=None,
             resource=None):
@@ -49,6 +50,7 @@ class SettingsBuilder:
                 api_definition=api_definition,
                 icon=icon,
                 client_id=client_id,
+                client_secret=client_secret,
                 tenant=tenant,
                 authority_url=authority_url,
                 resource=resource
@@ -62,7 +64,8 @@ class SettingsBuilder:
             client_id,
             tenant,
             authority_url,
-            resource):
+            resource,
+            client_secret=None):
         """
         Loads settings into a settings object.
         """
@@ -80,6 +83,7 @@ class SettingsBuilder:
                 api_definition=None,
                 icon=None,
                 client_id=client_id,
+                client_secret=client_secret,
                 tenant=tenant,
                 authority_url=authority_url,
                 resource=resource

@@ -4,16 +4,17 @@
 # license information.
 # -----------------------------------------------------------------------------
 """
-Represents a settings object consructed from settings.json
+Represents a settings object constructed from settings.json
 """
 
 
 # pylint: disable=too-few-public-methods
 class Settings:
     """
-    Represents a settings object consructed from settings.json
+    Represents a settings object constructed from settings.json
     """
     # pylint: disable=too-many-arguments
+
     def __init__(
             self,
             connector_id,
@@ -26,6 +27,7 @@ class Settings:
             flow_url=None,
             flow_api_version=None,
             client_id=None,
+            client_secret=None,
             tenant=None,
             authority_url=None,
             resource=None):
@@ -50,6 +52,7 @@ class Settings:
         self.flow_base_path = 'providers/Microsoft.ProcessSimple'          # Constant
 
         self.client_id = client_id or '04b07795-8ddb-461a-bbee-02f9e1bf7b46'
+        self.client_secret = client_secret
         self.tenant = tenant or 'common'
         self.authority_url = authority_url or 'https://login.microsoftonline.com/'
         self.resource = resource or 'https://management.core.windows.net/'

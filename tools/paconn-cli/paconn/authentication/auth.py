@@ -27,11 +27,15 @@ def get_authentication(settings, force_authenticate):
     if token_expired or force_authenticate:
         profile = Profile(
             client_id=settings.client_id,
+            client_secret=settings.client_secret,
             tenant=settings.tenant,
             resource=settings.resource,
             authority_url=settings.authority_url)
 
-        credentials = profile.authenticate_device_code()
+        if profile.client_secret:
+            credentials = profile.authenticate_client_secret()
+        else:
+            credentials = profile.authenticate_device_code()
 
         tokenmanager.write(credentials)
 
@@ -40,6 +44,7 @@ def get_authentication(settings, force_authenticate):
     # Couldn't acquire valid token
     if token_expired:
         raise CLIError('Couldn\'t get authentication')
+
 
 def remove_authentication():
     tokenmanager = TokenManager()

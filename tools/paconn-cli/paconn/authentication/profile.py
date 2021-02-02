@@ -18,8 +18,9 @@ class Profile:
     A Class representing user profile.
     """
 
-    def __init__(self, client_id, tenant, resource, authority_url):
+    def __init__(self, client_id, tenant, resource, authority_url, client_secret=None):
         self.client_id = client_id
+        self.client_secret = client_secret
         self.tenant = tenant
         self.resource = resource
         self.authority_url = authority_url
@@ -47,6 +48,23 @@ class Profile:
             resource=self.resource,
             user_code_info=code,
             client_id=self.client_id)
+
+        credentials = AADTokenCredentials(
+            token=mgmt_token,
+            client_id=self.client_id)
+
+        return credentials.token
+
+    def authenticate_client_secret(self):
+        """
+        Authenticate using service principal w/ key.
+        """
+        context = self._get_authentication_context()
+
+        mgmt_token = context.acquire_token_with_client_credentials(
+            resource=self.resource,
+            client_id=self.client_id,
+            client_secret=self.client_secret)
 
         credentials = AADTokenCredentials(
             token=mgmt_token,

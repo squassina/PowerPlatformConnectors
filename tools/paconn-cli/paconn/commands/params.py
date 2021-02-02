@@ -93,6 +93,13 @@ def load_arguments(self, command):
             default=False,
             const=True,
             help='Override a previous login, if exists.')
+        arg_context.argument(
+            CLIENT_SECRET,
+            options_list=['--client_secret', '-c'],
+            type=str,
+            required=False,
+            help=CLIENT_SECRET_HELP)
+
 
     with ArgumentsContext(self, _DOWNLOAD) as arg_context:
         arg_context.argument(
